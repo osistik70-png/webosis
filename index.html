@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIK OSIS SMPN 20 Tasikmalaya | Teknologi Masa Depan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-glow: #00d4ff;
+            --secondary-glow: #7c3aed;
+            --accent-glow: #ff6b6b;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 30, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            animation: float 20s infinite linear;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--secondary-glow) 0%, transparent 70%);
+            animation: float 25s infinite linear reverse;
+            top: 60%;
+            left: 80%;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100vw, 100vh) rotate(360deg); }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px var(--primary-glow)); }
+            to { filter: drop-shadow(0 0 30px var(--secondary-glow)); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 2px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 3rem 5% 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 80px 5%;
+            }
+        }
+
+        /* Typing Animation */
+        .typing-animation {
+            border-right: 3px solid var(--primary-glow);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: var(--primary-glow); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i> TIK OSIS
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">Tentang</a></li>
+                <li><a href="#program" class="nav-link">Program</a></li>
+                <li><a href="#team" class="nav-link">Tim</a></li>
+                <li><a href="#contact" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>TIK OSIS SMPN 20</h1>
+            <p class="typing-animation">Mewujudkan Generasi Digital Cerdas untuk Masa Depan Indonesia. Teknologi, Inovasi, Kolaborasi.</p>
+            <a href="#about" class="cta-button">Jelajahi Teknologi Kami</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">Tentang Kami</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Misi Teknologi</h3>
+                <p>Mendorong literasi digital, coding, dan inovasi teknologi di kalangan siswa SMPN 20 Tasikmalaya untuk menghadapi era industri 4.0.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Visi Global</h3>
+                <p>Menciptakan komunitas siswa yang kompeten dalam teknologi informasi dan komunikasi, siap bersaing di tingkat nasional maupun internasional.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Komunitas Aktif</h3>
+                <p>Lebih dari 150 siswa aktif terlibat dalam berbagai kegiatan workshop, lomba, dan proyek pengembangan teknologi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section id="program" class="section" style="background: rgba(20, 20, 30, 0.5);">
+        <h2 class="section-title">Program Unggulan</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Kelas Coding</h3>
+                <p>Workshop HTML, CSS, JavaScript, Python, dan pengembangan web/app untuk pemula hingga advance.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Robotika</h3>
+                <p>Pembelajaran Arduino, Raspberry Pi, dan kompetisi robotik tingkat kabupaten dan provinsi.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Game Development</h3>
+                <p>Membuat game edukasi menggunakan Unity dan Godot untuk pembelajaran interaktif.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Digital Content</h3>
+                <p>Produksi konten video, editing, fotografi drone, dan social media marketing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <h2 class="
